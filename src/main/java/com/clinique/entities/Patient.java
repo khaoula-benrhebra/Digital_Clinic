@@ -4,6 +4,9 @@ package com.clinique.entities;
 import com.clinique.entities.enums.Role;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity @Table(name = "patients")
 @PrimaryKeyJoinColumn(name = "personne_id")
 public class Patient extends Personne{
@@ -27,9 +30,7 @@ public class Patient extends Personne{
 
 
     public double getPoids() {
-        return poids;
-    }
-
+        return poids;}
     public void setPoids(double poids) {
         this.poids = poids;
     }
@@ -37,8 +38,13 @@ public class Patient extends Personne{
     public double getTaille() {
         return taille;
     }
-
     public void setTaille(double taille) {
         this.taille = taille;
+    }
+
+    public List<Consultation> getConsultations() {
+        return consultations;}
+    public void setConsultations(List<Consultation> consultations) {
+        this.consultations = consultations;
     }
 }

@@ -17,7 +17,7 @@ public class Departement {
     private String nom;
 
     @OneToMany(mappedBy = "departement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Docteur> docreurs = new ArrayList<>();
+    private List<Docteur> docteurs = new ArrayList<>();
 
     @OneToMany(mappedBy = "departement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Salle> salles = new ArrayList<>();
@@ -27,10 +27,18 @@ public class Departement {
 
     }
 
-    public Long getId() {
-        return id;
+    public Departement() {
+
     }
 
+    public Departement(Long id, String nom, List<Docteur> docreurs, List<Salle> salles) {
+        this.id = id;
+        this.nom = nom;
+        this.docteurs = docreurs;
+        this.salles = salles;
+    }
+
+    public Long getId() {return id;}
     public void setId(Long id) {
         this.id = id;
     }
@@ -38,23 +46,20 @@ public class Departement {
     public String getNom() {
         return nom;
     }
-
     public void setNom(String nom) {
         this.nom = nom;
     }
 
-    public List<Docteur> getDocreurs() {
-        return docreurs;
+    public List<Docteur> getDocteurs() {
+        return docteurs;
     }
-
-    public void setDocreurs(List<Docteur> docreurs) {
-        this.docreurs = docreurs;
+    public void setDocteurs(List<Docteur> docreurs) {
+        this.docteurs = docreurs;
     }
 
     public List<Salle> getSalles() {
         return salles;
     }
-
     public void setSalles(List<Salle> salles) {
         this.salles = salles;
     }

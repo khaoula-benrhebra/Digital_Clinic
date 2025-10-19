@@ -6,10 +6,11 @@ import jakarta.persistence.*;
 
 
 @Entity @Table(name = "personnes")
-public class Personne {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Personne {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected   long id ;
+    protected   Long id ;
 
     @Column(name="nom" , nullable = false)
     protected   String nom ;
@@ -17,8 +18,8 @@ public class Personne {
     @Column(name = "prenom" , nullable = false)
     protected String prenom ;
 
-    @Column (name = "email" , nullable = false)
-    protected String emal ;
+    @Column (name = "email" ,unique = true, nullable = false)
+    protected String email ;
 
     @Column (name = "password" , nullable = false)
     protected String password ;
@@ -29,19 +30,19 @@ public class Personne {
 
     public Personne(){};
 
-    public Personne(String nom, String prenom, String emal, String password, Role role) {
+    public Personne(String nom, String prenom, String email, String password, Role role) {
         this.nom = nom;
         this.prenom = prenom;
-        this.emal = emal;
+        this.email = email;
         this.password = password;
         this.role=role;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -62,11 +63,11 @@ public class Personne {
     }
 
     public String getEmal() {
-        return emal;
+        return email;
     }
 
     public void setEmal(String emal) {
-        this.emal = emal;
+        this.email = emal;
     }
 
     public String getPassword() {
@@ -83,5 +84,13 @@ public class Personne {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

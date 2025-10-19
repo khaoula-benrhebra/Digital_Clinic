@@ -3,9 +3,25 @@ package com.clinique.util;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
+import jakarta.servlet.annotation.WebListener;
 
-public class DatabaseUtil {
+@WebListener
+public class DatabaseUtil implements ServletContextListener {
     private static EntityManagerFactory emf;
+
+    @Override
+    public void contextInitialized(ServletContextEvent sce) {
+        System.out.println("Initialisation de la base de données");
+        getEntityManager().close();
+        System.out.println("Tables créées ");
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+        close();
+    }
 
     public static EntityManager getEntityManager() {
         if (emf == null) {
